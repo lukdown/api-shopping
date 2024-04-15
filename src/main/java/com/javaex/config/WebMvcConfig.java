@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+	
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**") // 경로
@@ -21,6 +22,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**")
-                .addResourceLocations("file:C:\\javaStudy\\upload\\");
+                .addResourceLocations("file:D:\\javaStudy\\upload\\");
 	}
 }
