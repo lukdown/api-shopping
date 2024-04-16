@@ -15,6 +15,7 @@ public class MemberDao {
 	//로그인
 	public UserVo memberselectByIdPw(UserVo userVo) {
 		System.out.println("MemberDao.memberselectByIdPw()");
+		System.out.println(userVo);
 		UserVo authUser = sqlSession.selectOne("user.selectByIdPw", userVo);
 		System.out.println(authUser);
 		

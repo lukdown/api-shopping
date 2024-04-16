@@ -3,12 +3,12 @@
 
 <mapper namespace="user">
 	<!-- 로그인 -->
-	<select id="selectByIdPw" resultType="com.javaex.vo.UserVo" parameterType="com.javaex.vo.UserVo">
+	<select id="selectByIdPw" resultType="UserVo" parameterType="UserVo">
 		<![CDATA[
 			select user_no, user_name, user_gender, user_age, user_hp, user_reg, user_address
 			from user
-			where id= #{id}
-			and password=#{password}
+			where user_id= #{user_id}
+			and user_pw=#{user_pw}
 		]]>
 	</select>
 	
