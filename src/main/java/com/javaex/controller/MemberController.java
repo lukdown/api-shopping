@@ -29,7 +29,7 @@ public class MemberController {
 		
 		if (authUser != null) {
 			//토큰 발급 헤더에 실어 보낸다
-			JwtUtil.createTokenAndSetHeader(response, ""+ authUser.getUser_no());
+			JwtUtil.createTokenAndSetHeader(response, "" + authUser.getUser_no());
 			return JsonResult.success(authUser);
 		}else {
 			return JsonResult.fail("실패");

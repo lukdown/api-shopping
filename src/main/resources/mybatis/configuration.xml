@@ -19,5 +19,6 @@
     -->
         <mapper resource="mybatis/mappers/user.xml" />
         <mapper resource="mybatis/mappers/orders.xml" />
+        <mapper resource="mybatis/mappers/cart.xml" />
     </mappers>
 </configuration>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cart">
-	<select id="selectShoppingbasketList">
+	<select id="selectShoppingbasketList" resultType="CartVo" parameterType="CartVo">
 		<![CDATA[		
 			select p.p_name,
 				   p.p_price,
