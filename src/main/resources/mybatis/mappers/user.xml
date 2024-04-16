@@ -2,7 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="user">
-
+	<!-- 로그인 -->
+	<select id="selectByIdPw" resultType="UserVo" parameterType="UserVo">
+		<![CDATA[
+			select user_no, user_name, user_gender, user_age, user_hp, user_reg, user_address
+			from user
+			where user_id= #{user_id}
+			and user_pw=#{user_pw}
+		]]>
+	</select>
 	
 	
 </mapper>
