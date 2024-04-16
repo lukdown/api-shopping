@@ -18,7 +18,7 @@ public class PaymentController {
 	
 	@GetMapping("/api/admin/paymentmanage")
 	public JsonResult paymentManageList() {
-		System.out.println("PaymentController.paymentManageList()");
+		System.out.println("PaymentController.opaymentManageList()");
 
 		List<OrdersVo> paymentManageList = paymentService.exePaymentManageList();
 
