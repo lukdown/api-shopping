@@ -2,7 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orders">
-
+<select id="paymentManageList" resultType="OrdersVo">
+		<![CDATA[
+			select o_date, 
+					o_name, 
+					o_address, 
+					o_hp, 
+					o_request, 
+					totalprice, 
+					o_status,
+					 o_payment
+			from orders
+		]]>
+	</select>
 	
 	
 </mapper>
