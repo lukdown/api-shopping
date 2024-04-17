@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.OrdersVo;
-import com.javaex.vo.PageVo;
 
 @Repository
 public class PaymentDao {
@@ -32,6 +31,13 @@ public class PaymentDao {
 		int totalCount = sqlSession.selectOne("orders.selectOrdersTotalCnt", limitMap);
 
 		return totalCount;
+	}
+	
+	//배송상태 변경 
+	public int pStatusChange(int o_no) {
+		System.out.println("pStatusChange()");
+		int count = sqlSession.update("orders.pStatusChange", o_no);
+		return count;
 	}
 	
 }

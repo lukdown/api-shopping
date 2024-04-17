@@ -16,6 +16,7 @@ public class PaymentService {
 	@Autowired
 	private PaymentDao paymentDao;
 	
+	//리스트
 	public Map<String, Object> exePaymentManageList(int crtPage, String keyword, String category) {
 		System.out.println("PtService.exeMyMemberList()");
 
@@ -75,6 +76,14 @@ public class PaymentService {
 		pMap.put("next", next);
 
 		return pMap;
+	}
+	
+	
+	//배송상태 변경 
+	public int exePStatusChange(int o_no) {
+		System.out.println("exePStatusChange()");
+		int count = paymentDao.pStatusChange(o_no);
+		return count;
 	}
 	
 }
