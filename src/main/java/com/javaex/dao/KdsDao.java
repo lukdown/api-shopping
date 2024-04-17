@@ -18,7 +18,9 @@ public class KdsDao {
 	public int productInsert(ProductVo productVo) {
 		System.out.println("ProductDao.productInsert()");
 		
-		return sqlSession.insert("product.insert", productVo);
+		int count=sqlSession.insert("product.insert", productVo);
+		
+		return count;
 	}
 	
 	//1개 데이터 가져오기 - 삭제

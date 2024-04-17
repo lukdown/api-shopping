@@ -23,7 +23,7 @@ public class KdsController {
 	private KdsService kdsService;
 	
 	//등록
-	@PostMapping("api/admin/write")
+	@PostMapping("api/admin/add")
 	public JsonResult productWrite(@RequestBody ProductVo productVo) {
 		System.out.println("ProductController.write()");
 		
@@ -33,7 +33,7 @@ public class KdsController {
 	}
 	
 	//삭제
-	@DeleteMapping("api/admin/delete/{p_no}")
+	@PostMapping("api/admin/delete/{p_no}")
 	public JsonResult productdelete(@PathVariable("p_no") int p_no) {
 		System.out.println("ProductController.delete()");
 		
