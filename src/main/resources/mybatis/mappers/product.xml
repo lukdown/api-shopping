@@ -3,11 +3,34 @@
 
 <mapper namespace="product">
 
-	<select id="selectList" resultType="ProductVo">
+	<!-- 나의 pt회원리스트 -->
+	<select id="selectlist" parameterType="map" resultType="ProductVo">
 		<![CDATA[
 			select *
 			from product
+			
 		]]>
+		<if test="keyword != null">
+			<![CDATA[
+				where (p_name like concat('%',#{keyword},'%') or p_category like concat('%',#{keyword},'%'))
+			]]>
+		</if>	
+		<![CDATA[				 
+			limit #{startRowNo}, #{listCnt}
+		]]>
+	</select>
+	
+	<!-- 전체 글갯수 -->
+	<select id="selectTotalCnt" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(*) count
+			from product
+		]]>
+		<if test="keyword != null">
+			<![CDATA[
+				where (p_name like concat('%',#{keyword},'%') or p_category like concat('%',#{keyword},'%'))
+			]]>
+		</if>	
 	</select>
 	
 </mapper>
