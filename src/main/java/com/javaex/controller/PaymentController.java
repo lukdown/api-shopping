@@ -21,7 +21,7 @@ public class PaymentController {
 	
 	@PostMapping("/api/admin/paymentmanage")
 	public JsonResult paymentManageList(@RequestBody PageVo pageVo) {
-		System.out.println("PaymentController.opaymentManageList()");
+		System.out.println("PaymentController.opaymentManageList())");
 		//List<OrdersVo> paymentManageList = paymentService.exePaymentManageList();
 		//System.out.println("paymentController"+paymentManageList);
 		
