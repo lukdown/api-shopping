@@ -79,6 +79,33 @@
 	</update>
 	
 	
+	<!-- 회원 결제창 -->
+	<!-- 정보 불러오기 -->
+	<select id="cartList" parameterType="int" resultType="CartVo">
+		<![CDATA[
+			select c.c_no,
+				   p.p_name,
+				   p.p_price,
+				   c.c_p_amount,
+				   c.c_size
+			from cart c,product p,user u
+			where c.user_no = u.user_no
+			and c.p_no = p.p_no
+			and c.user_no = #{user_no};
+		]]>
+	</select>
+	
+	<select id="userInfo" parameterType="int" resultType="UserVo">
+		<![CDATA[
+			select user_name, 
+				     user_hp,
+			         user_address
+			from user
+			where user_no = #{user_no};
+		]]>
+	</select>
+	
+	
 	
 	
 	

@@ -3,6 +3,7 @@ package com.javaex.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javaex.service.PaymentService;
 import com.javaex.util.JsonResult;
+import com.javaex.util.JwtUtil;
 import com.javaex.vo.PageVo;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class PaymentController {
@@ -40,6 +44,43 @@ public class PaymentController {
 		int count = paymentService.exePStatusChange(o_no);
 		return JsonResult.success(count);
 	}
+	
+	
+	///////////////////////////////////////////////////////////
+	////회원////
+	@GetMapping("/api/customer/payment")
+	public Map<String, Object> customerView(HttpServletRequest request) {
+		System.out.println("customerView");
+
+		int no = JwtUtil.getNoFromHeader(request);
+		Map<String, Object> paymentMap = paymentService.exeCustomerView(no);
+		System.out.println(paymentMap);
+		return paymentMap;
+	}
+	
+	//orders insert
+	@PostMapping("/api/customer/payment")
+	public JsonResult InsertProductE(HttpServletRequest request) {
+		System.out.println("PaymentController.PayproductE()");
+
+		// 토큰에서 로그인한 회원번호
+		// JWT 토큰에서 no 값을 추출
+		int no = JwtUtil.getNoFromHeader(request);
+		// int no = memberVo.getNo();
+		System.out.println(no);
+		if (no != -1) { // 정상
+			//int count = paymentService.exeInsertProductE(no);
+			//System.out.println(lessonMap);
+
+			return JsonResult.success(1);
+		} else {
+			// 토큰이 없거나(로그인상태 아님) 변조된 경우
+			return JsonResult.fail("fail");
+		}
+	}
+	
+	
+	
 	
 	
 }

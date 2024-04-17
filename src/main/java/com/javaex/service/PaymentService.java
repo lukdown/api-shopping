@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.PaymentDao;
+import com.javaex.vo.CartVo;
 import com.javaex.vo.OrdersVo;
+import com.javaex.vo.UserVo;
 
 @Service
 public class PaymentService {
@@ -85,5 +87,28 @@ public class PaymentService {
 		int count = paymentDao.pStatusChange(o_no);
 		return count;
 	}
+	
+	/////////////////////////////////////////////////////////////////////////
+	//회원
+	
+	//회원 리스트 
+	public Map<String, Object> exeCustomerView(int no){
+		System.out.println("exeCustomerView()");
+		
+		List<CartVo> cartList = paymentDao.cartList(no);
+		UserVo userVo = paymentDao.userInfo(no);
+		
+		Map<String, Object> customerMap = new HashMap<String, Object>();
+		customerMap.put("cartList", cartList);
+		customerMap.put("userVo", userVo);
+		
+		return customerMap;
+	}
+	
+	
+	
+	
+	
+	
 	
 }

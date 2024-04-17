@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.CartVo;
 import com.javaex.vo.OrdersVo;
+import com.javaex.vo.UserVo;
 
 @Repository
 public class PaymentDao {
@@ -38,6 +40,23 @@ public class PaymentDao {
 		System.out.println("pStatusChange()");
 		int count = sqlSession.update("orders.pStatusChange", o_no);
 		return count;
+	}
+	
+	
+	////////////////////////////////////////////////
+	//회원
+	//장바구니 내용 불러오기
+	public List<CartVo> cartList(int no){
+		System.out.println("cartList()");
+		List<CartVo> cartList = sqlSession.selectList("orders.cartList", no);
+		return cartList;
+	}
+	
+	//개인정보 불러오기 
+	public UserVo userInfo(int no) {
+		System.out.println("userInfo()");
+		UserVo userVo = sqlSession.selectOne("orders.userInfo", no);
+		return userVo;
 	}
 	
 }
