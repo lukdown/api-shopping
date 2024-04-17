@@ -14,9 +14,9 @@
         <mapper resource="mybatis/mappers/cart.xml" />
         <mapper resource="mybatis/mappers/deliveryaddress.xml" />
         
-        <mapper resource="mybatis/mappers/product.xml" />
         <mapper resource="mybatis/mappers/producte.xml" />
     -->
+        <mapper resource="mybatis/mappers/product.xml" />
         <mapper resource="mybatis/mappers/user.xml" />
         <mapper resource="mybatis/mappers/orders.xml" />
         <mapper resource="mybatis/mappers/cart.xml" />

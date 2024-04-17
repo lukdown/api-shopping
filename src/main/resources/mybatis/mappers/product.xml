@@ -3,6 +3,11 @@
 
 <mapper namespace="product">
 
-	
+	<select id="selectList" resultType="ProductVo">
+		<![CDATA[
+			select *
+			from product
+		]]>
+	</select>
 	
 </mapper>
