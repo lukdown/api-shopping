@@ -54,14 +54,5 @@ public class KdsController {
 		
 		return JsonResult.success(pList);
 	}
-	/*
-	@GetMapping("api/admin/productlist")
-	public List<ProductVo> productAdminList() {
-		System.out.println("ProductController.productAdminList()");
-		
-		List<ProductVo> pList = productService.exeProductAdminList();
-		
-		return pList;
-	}*/
 	
 }
