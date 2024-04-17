@@ -2,18 +2,76 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orders">
-<select id="paymentManageList" resultType="OrdersVo">
+
+<select id="paymentManageList" parameterType="map" resultType="OrdersVo">
 		<![CDATA[
-			select o_date, 
-					o_name, 
-					o_address, 
-					o_hp, 
-					o_request, 
-					totalprice, 
-					o_status,
-					 o_payment
+			select *
 			from orders
 		]]>
+		<choose>
+			<when test="keyword != null and category != null and category == 0">
+				<![CDATA[
+					where (o_name like concat('%', #{keyword}, '%') 
+							or o_hp like concat('%', #{keyword}, '%') 
+							or o_address like concat('%', #{keyword}, '%')
+							or o_date like concat('%', #{keyword}, '%'))
+				]]>
+			</when>
+				
+			<when test="keyword != null and category != null and category == 1">
+				<![CDATA[
+					where (o_name like concat('%', #{keyword}, '%'))
+				]]>
+			</when>	
+			<when test="keyword != null and category != null and category == 2">
+				<![CDATA[
+					where (o_hp like concat('%', #{keyword}, '%'))
+				]]>
+			</when>
+			
+			<otherwise></otherwise>
+		</choose>
+		<![CDATA[				 
+				limit #{startRowNo}, #{listCnt}
+			]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectOrdersTotalCnt" parameterType="map" resultType="int">
+		<![CDATA[
+			select count(*) count
+			from orders
+		]]>
+		<choose>
+			<when test="keyword != null and category != null and category == 0">
+				<![CDATA[
+					where (o_name like concat('%', #{keyword}, '%') 
+							or o_hp like concat('%', #{keyword}, '%') 
+							or o_address like concat('%', #{keyword}, '%')
+							or o_date like concat('%', #{keyword}, '%'))
+				]]>
+			</when>
+			<when test="keyword != null and category != null and category == 1">
+				<![CDATA[
+					where (o_name like concat('%', #{keyword}, '%'))
+				]]>
+			</when>	
+			<when test="keyword != null and category != null and category == 2">
+				<![CDATA[
+					where (o_hp like concat('%', #{keyword}, '%'))
+				]]>
+			</when>
+			
+			<otherwise></otherwise>
+		</choose>
 	</select>
 	
 	

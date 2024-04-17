@@ -1,30 +1,34 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.javaex.service.PaymentService;
 import com.javaex.util.JsonResult;
 import com.javaex.vo.OrdersVo;
+import com.javaex.vo.PageVo;
 
-@Controller
+@RestController
 public class PaymentController {
 
 	@Autowired
 	private PaymentService paymentService;
 	
-	@GetMapping("/api/admin/paymentmanage")
-	public JsonResult paymentManageList() {
+	@PostMapping("/api/admin/paymentmanage")
+	public JsonResult paymentManageList(@RequestBody PageVo pageVo) {
 		System.out.println("PaymentController.opaymentManageList()");
-
-		List<OrdersVo> paymentManageList = paymentService.exePaymentManageList();
-
-		System.out.println(paymentManageList);
-
-		return JsonResult.success(paymentManageList);
+		//List<OrdersVo> paymentManageList = paymentService.exePaymentManageList();
+		//System.out.println("paymentController"+paymentManageList);
+		
+		Map<String, Object> pMap = paymentService.exePaymentManageList(pageVo.getCrtPage(), pageVo.getKeyword(), pageVo.getCategory());
+		System.out.println(pMap);
+		
+		return JsonResult.success(pMap);
 	}
 	
 }
