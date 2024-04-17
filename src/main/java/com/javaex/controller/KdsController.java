@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javaex.service.KdsService;
@@ -32,13 +34,13 @@ public class KdsController {
 	
 	//삭제
 	@DeleteMapping("api/admin/delete/{p_no}")
-	public JsonResult productdelete(@RequestBody ProductVo productVo,
-					  				@PathVariable("p_no") int p_no) {
+	public JsonResult productdelete(@PathVariable("p_no") int p_no) {
 		System.out.println("ProductController.delete()");
 		
-		productVo.setP_no(p_no);
+		ProductVo pVo=new ProductVo();
+		pVo.setP_no(p_no);
 		
-		int count=kdsService.exeProductRemove(productVo);
+		int count=kdsService.exeProductRemove(pVo);
 		
 		return JsonResult.success(count);
 	}

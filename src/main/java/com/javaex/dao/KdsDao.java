@@ -35,7 +35,6 @@ public class KdsDao {
 		System.out.println("ProductDao.productAdminList()");
 
 		List<ProductVo> pList = sqlSession.selectList("product.selectAll");
-		System.out.println(pList);
 
 		return pList;
 	}
