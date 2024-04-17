@@ -89,7 +89,7 @@ public class PjhController {
 
 	// 상품 장바구니 등록
 	@PostMapping(value = "/api/customer/productdetails/{p_no}")
-	public int Insert(@RequestBody CartVo cartVo,HttpServletRequest request,
+	public JsonResult Insert(@RequestBody CartVo cartVo,HttpServletRequest request,
 					  @PathVariable(value = "p_no") int no) {
 		System.out.println("PjhController.Insert()");
 
@@ -104,6 +104,6 @@ public class PjhController {
 		
 		int count = pjhService.exeInsert(cartVo);
 
-		return count;
+		return JsonResult.success(count);
 	}
 }
