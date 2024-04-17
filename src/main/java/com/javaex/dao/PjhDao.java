@@ -13,6 +13,7 @@ public class PjhDao {
 	@Autowired
 	private SqlSession sqlSession;
 
+	// 장바구니 리스트
 	public List<CartVo> ShoppingbasketList(int user_no) {
 		System.out.println("PjhDao.ShoppingbasketList()");
 
@@ -21,7 +22,7 @@ public class PjhDao {
 		return cartVo;
 	}
 
-	// 삭제
+	// 장바구니 삭제
 	public int cartDelete(int no) {
 		System.out.println("phonebookdao.personDelete()");
 
@@ -30,7 +31,7 @@ public class PjhDao {
 		return count;
 	}
 
-	// 수정
+	// 장바구니 수정
 	public int cartUpdate(CartVo cartVo) {
 
 		int count = sqlSession.update("cart.update", cartVo);
@@ -38,12 +39,29 @@ public class PjhDao {
 		return count;
 	}
 
-	// 전체삭제
+	// 장바구니 전체삭제
 	public int cartDeleteAll(int no) {
 		System.out.println("phonebookdao.personDelete()");
 
 		int count = sqlSession.delete("cart.deleteAll", no);
 
+		return count;
+	}
+
+	// 상품 상세폼
+	public CartVo productSelectOne(int no) {
+		System.out.println("phonebookdao.personSelectOne");
+
+		CartVo cartVo = sqlSession.selectOne("cart.selectOne", no);
+
+		return cartVo;
+	}
+	
+	// 상품 장바구니 등록
+	public int cartInsert(CartVo cartVo) {
+
+		int count = sqlSession.insert("cart.insertcart", cartVo);
+		System.out.println(count);
 		return count;
 	}
 }
