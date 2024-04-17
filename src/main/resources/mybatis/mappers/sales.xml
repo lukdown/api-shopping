@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sales">
+
+	<!-- 해당 날짜 데이터 가져오기 -->
+	<select id="selectDateOne" parameterType="int" resultType="SalesVo">
+		<![CDATA[
+			select *
+			from (	select pe.e_no,
+						   pe.p_no,
+						   pe.o_no,
+						   pe.e_amount,
+						   pe.e_size,
+						   o.user_no,
+						   o.o_name,
+						   o.o_address,
+						   o.o_hp,
+						   o.o_request,
+						   o.totalprice,
+						   o.o_date,
+						   o.o_status,
+						   o.o_payment
+					from product_e pe
+					right join orders o on pe.o_no = o.o_no ) a
+			left join product p on p.p_no = a.p_no
+			where a.o_date = #{ o_date }
+		]]>
+	</select>
+
+
+
+
+	
+</mapper>
