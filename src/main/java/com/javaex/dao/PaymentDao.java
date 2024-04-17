@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.CartVo;
 import com.javaex.vo.OrdersVo;
+import com.javaex.vo.ProductEVo;
 import com.javaex.vo.UserVo;
 
 @Repository
@@ -59,4 +60,20 @@ public class PaymentDao {
 		return userVo;
 	}
 	
+	public int insertOrders(OrdersVo ordersVo) {
+		System.out.println("insertProductE()");
+		int count = sqlSession.insert("orders.insertOrders.", ordersVo);
+		return count;
+	}
+	
+	public int insertProduct(List<ProductEVo>paymentList) {
+		System.out.println("insertProduct()");
+		/*
+		for(int i=0; i < paymentList.length; i++) {
+			OrdersVo ordersVo = paymentList[i];
+			int count = sqlSession.insert("orders.insertOrders", ordersVo);
+		}
+		*/
+		return 1;
+	}
 }

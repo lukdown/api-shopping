@@ -13,14 +13,18 @@ public class OrdersVo {
 	private String o_status;
 	private String o_payment;
 	
+	private int user_no;
+	
 	//생성자
 	public OrdersVo() {
 		super();
 	}
 
 
+	
+
 	public OrdersVo(int o_no, String o_name, String o_address, String o_hp, String o_request, int totalprice,
-			String o_date, String o_status, String o_payment) {
+			String o_date, String o_status, String o_payment, int user_no) {
 		super();
 		this.o_no = o_no;
 		this.o_name = o_name;
@@ -31,7 +35,10 @@ public class OrdersVo {
 		this.o_date = o_date;
 		this.o_status = o_status;
 		this.o_payment = o_payment;
+		this.user_no = user_no;
 	}
+
+
 
 
 	//메소드 -g/s
@@ -123,6 +130,16 @@ public class OrdersVo {
 	public void setO_payment(String o_payment) {
 		this.o_payment = o_payment;
 	}
+
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
+
+
 
 
 	@Override

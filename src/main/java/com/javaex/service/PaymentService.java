@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.javaex.dao.PaymentDao;
 import com.javaex.vo.CartVo;
 import com.javaex.vo.OrdersVo;
+import com.javaex.vo.ProductEVo;
 import com.javaex.vo.UserVo;
 
 @Service
@@ -105,7 +106,20 @@ public class PaymentService {
 		return customerMap;
 	}
 	
+	//orders insert
+	public int exeInsertOrders(OrdersVo ordersVo) {
+		System.out.println("exeInsertOrders()");
+		
+		int count = paymentDao.insertOrders(ordersVo);
+		return count;
+	}
 	
+	public int exeInsertProductE(List<ProductEVo>paymentList) {
+		System.out.println("exeInsertProductE");
+		
+		int count = paymentDao.insertProduct(paymentList);
+		return count;
+	}
 	
 	
 	
