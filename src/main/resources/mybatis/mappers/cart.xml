@@ -2,20 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cart">
+	<!-- 장바구니 리스트 -->
 	<select id="selectShoppingbasketList" resultType="CartVo" parameterType="CartVo">
 		<![CDATA[		
-			select p.p_name,
+			select c.c_no,
+				   p.p_name,
 				   p.p_price,
-			       c_p_amount,
-			       c_size,
+			       c.c_p_amount,
+			       c.c_size,
 			       p.saveName
 			from cart c,product p,user u
 			where c.user_no = u.user_no
 			and c.p_no = p.p_no
-			and c.user_no = #{user_no};
+			and c.user_no = #{user_no}
 		]]>
 	</select>
 
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="CartVo">
+		<![CDATA[
+			delete from cart
+			where c_no = #{no}
+		]]>
+	</delete>
 	
+	<!-- 수정 -->
+	<update id="update" parameterType="CartVo">
+		<![CDATA[
+			update cart
+			set c_size = #{c_size} ,
+				c_p_amount = #{c_p_amount}
+			where c_no =  #{c_no}
+		]]>
+	</update>
+	
+	<!-- 전체삭제 -->
+	<delete id="deleteAll" parameterType="CartVo">
+		<![CDATA[
+			delete from cart
+			where user_no = #{no}
+		]]>
+	</delete>
 	
 </mapper>
