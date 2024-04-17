@@ -3,7 +3,8 @@
 
 <mapper namespace="orders">
 
-<select id="paymentManageList" parameterType="map" resultType="OrdersVo">
+	<!-- 리스트 페이징O/검색O -->
+	<select id="paymentManageList" parameterType="map" resultType="OrdersVo">
 		<![CDATA[
 			select *
 			from orders
@@ -31,18 +32,11 @@
 			
 			<otherwise></otherwise>
 		</choose>
-		<![CDATA[				 
+		<![CDATA[		
+				order by o_no desc		 
 				limit #{startRowNo}, #{listCnt}
 			]]>
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	<select id="selectOrdersTotalCnt" parameterType="map" resultType="int">
@@ -73,6 +67,46 @@
 			<otherwise></otherwise>
 		</choose>
 	</select>
+	
+	
+	<!-- 배송상태 변경 -->
+	<update id="pStatusChange" parameterType="int">
+		<![CDATA[
+		update orders
+		set o_status = o_status + 1
+		where o_no = #{o_no}
+		]]>
+	</update>
+	
+	
+	<!-- 회원 결제창 -->
+	<!-- 정보 불러오기 -->
+	<select id="cartList" parameterType="int" resultType="CartVo">
+		<![CDATA[
+			select c.c_no,
+				   p.p_name,
+				   p.p_price,
+				   c.c_p_amount,
+				   c.c_size
+			from cart c,product p,user u
+			where c.user_no = u.user_no
+			and c.p_no = p.p_no
+			and c.user_no = #{user_no};
+		]]>
+	</select>
+	
+	<select id="userInfo" parameterType="int" resultType="UserVo">
+		<![CDATA[
+			select user_name, 
+				     user_hp,
+			         user_address
+			from user
+			where user_no = #{user_no};
+		]]>
+	</select>
+	
+	
+	
 	
 	
 </mapper>

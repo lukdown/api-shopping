@@ -9,12 +9,15 @@ public class CartVo {
 	private String saveName;
 	private int user_no;
 	private int c_no;
+	private int p_no;
+	private String p_explanation;
 
 	public CartVo() {
 		super();
 	}
 
-	public CartVo(String p_name, int p_price, int c_p_amount, String c_size, String saveName, int user_no, int c_no) {
+	public CartVo(String p_name, int p_price, int c_p_amount, String c_size, String saveName, int user_no, int c_no,
+			int p_no, String p_explanation) {
 		super();
 		this.p_name = p_name;
 		this.p_price = p_price;
@@ -23,6 +26,8 @@ public class CartVo {
 		this.saveName = saveName;
 		this.user_no = user_no;
 		this.c_no = c_no;
+		this.p_no = p_no;
+		this.p_explanation = p_explanation;
 	}
 
 	public String getP_name() {
@@ -81,10 +86,27 @@ public class CartVo {
 		this.c_no = c_no;
 	}
 
+	public int getP_no() {
+		return p_no;
+	}
+
+	public void setP_no(int p_no) {
+		this.p_no = p_no;
+	}
+
+	public String getP_explanation() {
+		return p_explanation;
+	}
+
+	public void setP_explanation(String p_explanation) {
+		this.p_explanation = p_explanation;
+	}
+
 	@Override
 	public String toString() {
 		return "CartVo [p_name=" + p_name + ", p_price=" + p_price + ", c_p_amount=" + c_p_amount + ", c_size=" + c_size
-				+ ", saveName=" + saveName + ", user_no=" + user_no + ", c_no=" + c_no + "]";
+				+ ", saveName=" + saveName + ", user_no=" + user_no + ", c_no=" + c_no + ", p_no=" + p_no
+				+ ", p_explanation=" + p_explanation + "]";
 	}
 
 }

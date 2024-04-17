@@ -18,7 +18,7 @@
 		]]>
 	</select>
 
-	<!-- 삭제 -->
+	<!-- 장바구니 삭제 -->
 	<delete id="delete" parameterType="CartVo">
 		<![CDATA[
 			delete from cart
@@ -26,7 +26,7 @@
 		]]>
 	</delete>
 	
-	<!-- 수정 -->
+	<!-- 장바구니 수정 -->
 	<update id="update" parameterType="CartVo">
 		<![CDATA[
 			update cart
@@ -36,12 +36,32 @@
 		]]>
 	</update>
 	
-	<!-- 전체삭제 -->
+	<!-- 장바구니 전체삭제 -->
 	<delete id="deleteAll" parameterType="CartVo">
 		<![CDATA[
 			delete from cart
 			where user_no = #{no}
 		]]>
 	</delete>
+	
+	<!-- 상품상세폼 -->
+	<select id="selectOne" parameterType="int" resultType="CartVo">
+		<![CDATA[
+			select p_name,
+				   p_price,
+				   saveName,
+				   p_explanation
+			from product
+			where p_no = #{no}
+		]]>
+	</select>
+	
+	<!-- 상품 장바구니 등록 -->
+	<insert id="insertcart" parameterType="CartVo">
+		<![CDATA[
+			INSERT INTO cart
+			VALUES (null,#{p_no},#{user_no},#{c_p_amount},null,#{c_size})
+		]]>
+	</insert>
 	
 </mapper>
