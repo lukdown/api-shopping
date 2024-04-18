@@ -3,7 +3,7 @@
 
 <mapper namespace="product">
 
-	<!-- 나의 pt회원리스트 -->
+	<!-- 고객 상품 리스트 -->
 	<select id="selectlist" parameterType="map" resultType="ProductVo">
 		<![CDATA[
 			select *
@@ -20,7 +20,7 @@
 		]]>
 	</select>
 	
-	<!-- 전체 글갯수 -->
+	<!-- 상품 리스트 전체 글갯수 -->
 	<select id="selectTotalCnt" parameterType="string" resultType="int">
 		<![CDATA[
 			select count(*) count

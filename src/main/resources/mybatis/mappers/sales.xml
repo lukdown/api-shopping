@@ -27,6 +27,71 @@
 			where a.o_date = #{ o_date }
 		]]>
 	</select>
+	
+	
+	
+	
+	<!-- 나의 pt회원리스트 -->
+	<select id="selectlist" parameterType="map" resultType="SalesVo">
+		<![CDATA[
+			select *
+			from (	select pe.e_no,
+						   pe.p_no,
+						   pe.o_no,
+						   pe.e_amount,
+						   pe.e_size,
+						   o.user_no,
+						   o.o_name,
+						   o.o_address,
+						   o.o_hp,
+						   o.o_request,
+						   o.totalprice,
+						   o.o_date,
+						   o.o_status,
+						   o.o_payment
+					from product_e pe
+					right join orders o on pe.o_no = o.o_no ) a
+			left join product p on p.p_no = a.p_no
+			
+		]]>
+		<if test="keyword != null">
+			<![CDATA[
+				where (o_date like concat('%',#{keyword},'%'))
+			]]>
+		</if>	
+		<![CDATA[				 
+			limit #{startRowNo}, #{listCnt}
+		]]>
+	</select>
+	
+	<!-- 전체 글갯수 -->
+	<select id="selectTotalCnt" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(*) count
+			from (	select pe.e_no,
+						   pe.p_no,
+						   pe.o_no,
+						   pe.e_amount,
+						   pe.e_size,
+						   o.user_no,
+						   o.o_name,
+						   o.o_address,
+						   o.o_hp,
+						   o.o_request,
+						   o.totalprice,
+						   o.o_date,
+						   o.o_status,
+						   o.o_payment
+					from product_e pe
+					right join orders o on pe.o_no = o.o_no ) a
+			left join product p on p.p_no = a.p_no
+		]]>
+		<if test="keyword != null">
+			<![CDATA[
+				where (o_date like concat('%',#{keyword},'%'))
+			]]>
+		</if>	
+	</select>
 
 
 

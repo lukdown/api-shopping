@@ -22,7 +22,21 @@ public class YysController {
 	@Autowired
 	private YysService yysService;
 
-	
+	// 리스트 가져오기
+	@PostMapping(value = "/api/admin/list")
+	public JsonResult adminproductlist(HttpServletRequest request, @RequestBody PageVo pageVo) {
+		System.out.println("YysController.adminproductlist()");
+
+		System.out.println(pageVo);
+
+		// int trainer_no = JwtUtil.getNoFromHeader(request);
+
+		Map<String, Object> pMap = yysService.exeAdminList(pageVo.getCrtPage(), pageVo.getKeyword());
+
+		// return null;
+		return JsonResult.success(pMap);
+	}
+
 	// 리스트 가져오기
 	@PostMapping(value = "/api/customer/list")
 	public JsonResult productlist(HttpServletRequest request, @RequestBody PageVo pageVo) {
@@ -30,11 +44,11 @@ public class YysController {
 
 		System.out.println(pageVo);
 
-		//int trainer_no = JwtUtil.getNoFromHeader(request);
+		// int trainer_no = JwtUtil.getNoFromHeader(request);
 
 		Map<String, Object> pMap = yysService.exeList(pageVo.getCrtPage(), pageVo.getKeyword());
 
-		//return null;
+		// return null;
 		return JsonResult.success(pMap);
 	}
 

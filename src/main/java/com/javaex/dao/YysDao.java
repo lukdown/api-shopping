@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.ProductVo;
+import com.javaex.vo.SalesVo;
 
 @Repository
 public class YysDao {
@@ -15,7 +16,31 @@ public class YysDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// 리스트(검색O,페이징 O)
+	// 관리자 상품 리스트(검색O,페이징 O)
+	public List<SalesVo> adminproductList(Map<String, Object> limiMap) {
+		System.out.println("YysDao.adminproductList");
+
+		List<SalesVo> adminproductList = sqlSession.selectList("sales.selectlist", limiMap);
+
+		System.out.println(adminproductList);
+
+		return adminproductList;
+	}
+
+	// 글 전체 갯수 //리스트(검색O,페이징O)
+	public int selectAdminTotalCnt(String keyword) {
+		System.out.println("YysDao.selectAdminTotalCnt()");
+
+		int admintotalCount = sqlSession.selectOne("sales.selectTotalCnt", keyword);
+
+		return admintotalCount;
+	}
+	
+	
+	
+	
+
+	// 고객 상품 리스트(검색O,페이징 O)
 	public List<ProductVo> productList(Map<String, Object> limiMap) {
 		System.out.println("YysDao.productList");
 
