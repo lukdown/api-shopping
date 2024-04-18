@@ -43,6 +43,15 @@ public class PaymentDao {
 		int count = sqlSession.update("orders.pStatusChange", o_no);
 		return count;
 	}
+	
+	//detail list
+	public List<ProductEVo> paymentDetail(int o_no){
+		System.out.println("paymentDetail()");
+		List<ProductEVo> detailList = sqlSession.selectList("orders.detailList", o_no);
+		System.out.println(detailList);
+		return detailList;
+		
+	}
 
 	////////////////////////////////////////////////
 	// 회원

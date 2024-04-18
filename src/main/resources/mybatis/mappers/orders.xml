@@ -78,6 +78,23 @@
 		]]>
 	</update>
 	
+	<!-- detail list -->
+	<select id="detailList" parameterType="int" resultType="productEVo">
+		<![CDATA[
+			select e.e_no,
+					    o.o_name, 
+					    e.e_amount, 
+					    e.e_size, 
+					    p.p_name, 
+					    p.p_price, 
+					    o.totalprice,
+					    o.o_status
+			from product_e e, product p, orders o
+			where e.p_no = p.p_no
+			and e.o_no = o.o_no
+			and e.o_no = #{o_no}
+		]]>
+	</select>
 	
 	<!-- 회원 결제창 -->
 	<!-- 정보 불러오기 -->

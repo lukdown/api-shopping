@@ -12,6 +12,11 @@ public class ProductEVo {
 	private String c_size;
 	private int c_no;
 	
+	private String o_name;
+	private String p_name;
+	private int p_price;
+	private int totalprice;
+	private String o_status;
 	
 	public ProductEVo() {
 		super();
@@ -30,6 +35,25 @@ public class ProductEVo {
 		this.c_no = c_no;
 	}
 
+	
+
+	public ProductEVo(int e_no, int p_no, int o_no, int e_amount, String e_size, int c_p_amount, String c_size,
+			int c_no, String o_name, String p_name, int p_price, int totalprice, String o_status) {
+		super();
+		this.e_no = e_no;
+		this.p_no = p_no;
+		this.o_no = o_no;
+		this.e_amount = e_amount;
+		this.e_size = e_size;
+		this.c_p_amount = c_p_amount;
+		this.c_size = c_size;
+		this.c_no = c_no;
+		this.o_name = o_name;
+		this.p_name = p_name;
+		this.p_price = p_price;
+		this.totalprice = totalprice;
+		this.o_status = o_status;
+	}
 
 	public int getE_no() {
 		return e_no;
@@ -105,6 +129,46 @@ public class ProductEVo {
 
 	public void setC_no(int c_no) {
 		this.c_no = c_no;
+	}
+
+	public String getO_name() {
+		return o_name;
+	}
+
+	public void setO_name(String o_name) {
+		this.o_name = o_name;
+	}
+
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+	public int getP_price() {
+		return p_price;
+	}
+
+	public void setP_price(int p_price) {
+		this.p_price = p_price;
+	}
+
+	public int getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(int totalprice) {
+		this.totalprice = totalprice;
+	}
+
+	public String getO_status() {
+		return o_status;
+	}
+
+	public void setO_status(String o_status) {
+		this.o_status = o_status;
 	}
 
 	@Override

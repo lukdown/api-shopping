@@ -88,6 +88,14 @@ public class PaymentService {
 		int count = paymentDao.pStatusChange(o_no);
 		return count;
 	}
+	
+	//detail list
+	public List<ProductEVo> exePaymentDetail(int o_no) {
+		System.out.println("exePaymentDetail()");
+		List<ProductEVo> detailList = paymentDao.paymentDetail(o_no);
+		System.out.println(detailList);
+		return detailList;
+	}
 
 	/////////////////////////////////////////////////////////////////////////
 	// 회원

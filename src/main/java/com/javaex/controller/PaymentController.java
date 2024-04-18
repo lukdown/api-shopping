@@ -18,7 +18,6 @@ import com.javaex.util.JwtUtil;
 import com.javaex.vo.OrdersVo;
 import com.javaex.vo.PageVo;
 import com.javaex.vo.ProductEVo;
-import com.javaex.vo.ProductVo;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -50,6 +49,17 @@ public class PaymentController {
 		int count = paymentService.exePStatusChange(o_no);
 		return JsonResult.success(count);
 	}
+	
+	//detail list
+	@GetMapping("/api/admin/paymentmanage/{o_no}")
+	public JsonResult paymentDetail(@PathVariable("o_no") int o_no) {
+		System.out.println("customerView");
+
+		List<ProductEVo> detailList = paymentService.exePaymentDetail(o_no);
+		System.out.println(detailList);
+		return JsonResult.success(detailList);
+	}
+	
 
 	///////////////////////////////////////////////////////////
 	//// 회원////
