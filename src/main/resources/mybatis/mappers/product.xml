@@ -81,7 +81,8 @@
 			where (p_name like concat('%',#{keyword},'%') or p_category like concat('%',#{keyword},'%'))
 		]]>
 		</if>
-		<![CDATA[				 
+		<![CDATA[		
+			order by p.p_no desc
 			limit #{startRowNo}, #{listCnt}
 		]]>
 	</select>
