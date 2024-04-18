@@ -37,10 +37,10 @@
 	<insert id="insert" parameterType="ProductVo">
 		<![CDATA[
 			insert into product
-			values(null, #{p_name}, #{p_price}, #{p_category}, #{p_explanation}, null, null, null, null, null)
+			values(null, #{p_name}, #{p_price}, #{p_category}, #{p_explanation}, #{filePath}, #{orgName}, #{saveName}, #{fileSize}, #{p_remarks})
 		]]>
 	</insert>
-	<!-- values(null, #{p_name}, #{p_price}, #{p_category}, #{p_explanation}, #{filePath}, #{orgName}, #{saveName}, #{fileSize}, #{p_remarks}) -->
+	
 
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="ProductVo">

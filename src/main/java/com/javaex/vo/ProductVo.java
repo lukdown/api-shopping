@@ -18,6 +18,19 @@ public class ProductVo {
 		super();
 	}
 
+	public ProductVo(String p_name, int p_price, String p_category, String p_explanation, String orgName,
+			String saveName, String filePath, long fileSize) {
+		super();
+		this.p_name = p_name;
+		this.p_price = p_price;
+		this.p_category = p_category;
+		this.p_explanation = p_explanation;
+		this.orgName = orgName;
+		this.saveName = saveName;
+		this.filePath = filePath;
+		this.fileSize = fileSize;
+	}
+
 	public ProductVo(int p_no, String p_name, int p_price, String p_category, String p_explanation, String orgName,
 			String saveName, String filePath, long fileSize, String p_remarks, int ep_no) {
 		super();
