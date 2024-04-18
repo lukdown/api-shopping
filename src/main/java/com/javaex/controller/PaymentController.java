@@ -1,5 +1,6 @@
 package com.javaex.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.javaex.service.PaymentService;
 import com.javaex.util.JsonResult;
 import com.javaex.util.JwtUtil;
+import com.javaex.vo.OrdersVo;
 import com.javaex.vo.PageVo;
+import com.javaex.vo.ProductEVo;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -60,19 +63,21 @@ public class PaymentController {
 	
 	//orders insert
 	@PostMapping("/api/customer/payment")
-	public JsonResult InsertProductE(HttpServletRequest request) {
+	public JsonResult InsertProductE(@RequestBody OrdersVo ordersVo, @RequestBody List<ProductEVo>paymentList, HttpServletRequest request) {
 		System.out.println("PaymentController.PayproductE()");
 
 		// 토큰에서 로그인한 회원번호
 		// JWT 토큰에서 no 값을 추출
 		int no = JwtUtil.getNoFromHeader(request);
-		// int no = memberVo.getNo();
+		ordersVo.setUser_no(no);
 		System.out.println(no);
 		if (no != -1) { // 정상
-			//int count = paymentService.exeInsertProductE(no);
-			//System.out.println(lessonMap);
+			int count = paymentService.exeInsertOrders(ordersVo);
+			System.out.println(count);
+			int result = paymentService.exeInsertProductE(paymentList);
+			System.out.println(result);
 
-			return JsonResult.success(1);
+			return JsonResult.success(count);
 		} else {
 			// 토큰이 없거나(로그인상태 아님) 변조된 경우
 			return JsonResult.fail("fail");

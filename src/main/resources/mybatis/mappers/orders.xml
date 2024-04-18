@@ -87,7 +87,8 @@
 				   p.p_name,
 				   p.p_price,
 				   c.c_p_amount,
-				   c.c_size
+				   c.c_size,
+				   p.p_no
 			from cart c,product p,user u
 			where c.user_no = u.user_no
 			and c.p_no = p.p_no
@@ -105,7 +106,12 @@
 		]]>
 	</select>
 	
-	
+	<insert id="insertOrders" parameterType="OrdersVo">
+		<![CDATA[
+			insert into orders
+			values(null, #{user_no}, #{o_name}, #{o_address}, #{o_hp}, #{o_request}, #{totalprice}, now(), '0', #{o_payement})
+		]]>
+	</insert>
 	
 	
 	
