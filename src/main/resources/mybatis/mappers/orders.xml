@@ -106,13 +106,43 @@
 		]]>
 	</select>
 	
+	<!-- 등록하기  -->
 	<insert id="insertOrders" parameterType="OrdersVo">
 		<![CDATA[
 			insert into orders
-			values(null, #{user_no}, #{o_name}, #{o_address}, #{o_hp}, #{o_request}, #{totalprice}, now(), '0', #{o_payement})
+			values(null, #{user_no}, #{o_name}, #{o_address}, #{o_hp}, #{o_request}, #{totalprice}, now(), '0', #{o_payment})
 		]]>
+		<selectKey keyProperty="o_no" resultType="int" order="AFTER">
+			<![CDATA[
+				select last_insert_id();
+			]]>
+		</selectKey>
 	</insert>
 	
+	<insert id="insertProduct" parameterType="java.util.List">
+		<![CDATA[
+			insert into product_e(
+				e_no,
+				p_no,
+				o_no,
+				e_amount,
+				e_size
+			)
+		]]>
+		<foreach item="item" index="index" collection="list" separator="union">
+			<![CDATA[
+				select null, #{item.p_no}, #{item.o_no}, #{item.c_p_amount}, #{item.c_size} from product_e
+			]]>
+		</foreach>
+	</insert>
+	
+	<!-- 장바구니 비우기 -->
+	<delete id="deleteCart" parameterType="CartVo">
+		<![CDATA[
+			delete from cart
+			where user_no = #{no}
+		]]>
+	</delete>
 	
 	
 </mapper>

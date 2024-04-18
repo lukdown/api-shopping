@@ -17,16 +17,16 @@ public class PaymentDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	// 리스트(검색O,페이징 O)
 	public List<OrdersVo> paymentManageList(Map<String, Object> limitMap) {
 		System.out.println("paymentManageList()");
-		System.out.println("limitMap: "+limitMap);
+		System.out.println("limitMap: " + limitMap);
 		List<OrdersVo> paymentManageList = sqlSession.selectList("orders.paymentManageList", limitMap);
 		System.out.println(paymentManageList);
 		return paymentManageList;
 	}
-	
+
 	// 글 전체 갯수 //리스트(검색O,페이징O)
 	public int selectmemberTotalCnt(Map<String, Object> limitMap) {
 		System.out.println("PaymentDao.selectmemberTotalCnt()");
@@ -35,45 +35,47 @@ public class PaymentDao {
 
 		return totalCount;
 	}
-	
-	//배송상태 변경 
+
+	// 배송상태 변경
 	public int pStatusChange(int o_no) {
 		System.out.println("pStatusChange()");
 		int count = sqlSession.update("orders.pStatusChange", o_no);
 		return count;
 	}
-	
-	
+
 	////////////////////////////////////////////////
-	//회원
-	//장바구니 내용 불러오기
-	public List<CartVo> cartList(int no){
+	// 회원
+	// 장바구니 내용 불러오기
+	public List<CartVo> cartList(int no) {
 		System.out.println("cartList()");
 		List<CartVo> cartList = sqlSession.selectList("orders.cartList", no);
 		return cartList;
 	}
-	
-	//개인정보 불러오기 
+
+	// 개인정보 불러오기
 	public UserVo userInfo(int no) {
 		System.out.println("userInfo()");
 		UserVo userVo = sqlSession.selectOne("orders.userInfo", no);
 		return userVo;
 	}
-	
+
 	public int insertOrders(OrdersVo ordersVo) {
-		System.out.println("insertProductE()");
-		int count = sqlSession.insert("orders.insertOrders.", ordersVo);
+		System.out.println("insertOrders()");
+		sqlSession.insert("orders.insertOrders", ordersVo);
+		System.out.println(ordersVo.getO_no());
+		return ordersVo.getO_no();
+	}
+
+	public int insertProduct(List<ProductEVo> paymentList) {
+		System.out.println("insertProduct()");
+
+		int count = sqlSession.insert("orders.insertProduct", paymentList);
+
 		return count;
 	}
-	
-	public int insertProduct(List<ProductEVo>paymentList) {
-		System.out.println("insertProduct()");
-		/*
-		for(int i=0; i < paymentList.length; i++) {
-			OrdersVo ordersVo = paymentList[i];
-			int count = sqlSession.insert("orders.insertOrders", ordersVo);
-		}
-		*/
-		return 1;
+
+	public int deleteCart(int no) {
+		System.out.println("deleteCart()");
+		return sqlSession.delete("orders.deleteCart", no);
 	}
 }

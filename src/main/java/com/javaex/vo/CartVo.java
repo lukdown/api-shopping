@@ -11,6 +11,8 @@ public class CartVo {
 	private int c_no;
 	private int p_no;
 	private String p_explanation;
+	
+	private int o_no;
 
 	public CartVo() {
 		super();
@@ -28,6 +30,23 @@ public class CartVo {
 		this.c_no = c_no;
 		this.p_no = p_no;
 		this.p_explanation = p_explanation;
+	}
+	
+	
+
+	public CartVo(String p_name, int p_price, int c_p_amount, String c_size, String saveName, int user_no, int c_no,
+			int p_no, String p_explanation, int o_no) {
+		super();
+		this.p_name = p_name;
+		this.p_price = p_price;
+		this.c_p_amount = c_p_amount;
+		this.c_size = c_size;
+		this.saveName = saveName;
+		this.user_no = user_no;
+		this.c_no = c_no;
+		this.p_no = p_no;
+		this.p_explanation = p_explanation;
+		this.o_no = o_no;
 	}
 
 	public String getP_name() {
@@ -100,6 +119,16 @@ public class CartVo {
 
 	public void setP_explanation(String p_explanation) {
 		this.p_explanation = p_explanation;
+	}
+	
+	
+
+	public int getO_no() {
+		return o_no;
+	}
+
+	public void setO_no(int o_no) {
+		this.o_no = o_no;
 	}
 
 	@Override

@@ -114,11 +114,19 @@ public class PaymentService {
 		return count;
 	}
 	
+	//product intsert
 	public int exeInsertProductE(List<ProductEVo>paymentList) {
 		System.out.println("exeInsertProductE");
 		
 		int count = paymentDao.insertProduct(paymentList);
 		return count;
+	}
+	
+	//장바구니 비워주기
+	public int exeDeleteCart(int no) {
+		System.out.println("exeDeleteCart()");
+		
+		return paymentDao.deleteCart(no);
 	}
 	
 	
