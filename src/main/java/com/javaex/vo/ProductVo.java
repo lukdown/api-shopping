@@ -12,13 +12,14 @@ public class ProductVo {
 	private String filePath;
 	private long fileSize;
 	private String p_remarks;
+	private int ep_no;
 
 	public ProductVo() {
 		super();
 	}
 
 	public ProductVo(int p_no, String p_name, int p_price, String p_category, String p_explanation, String orgName,
-			String saveName, String filePath, long fileSize, String p_remarks) {
+			String saveName, String filePath, long fileSize, String p_remarks, int ep_no) {
 		super();
 		this.p_no = p_no;
 		this.p_name = p_name;
@@ -30,6 +31,7 @@ public class ProductVo {
 		this.filePath = filePath;
 		this.fileSize = fileSize;
 		this.p_remarks = p_remarks;
+		this.ep_no = ep_no;
 	}
 
 	public int getP_no() {
@@ -112,11 +114,19 @@ public class ProductVo {
 		this.p_remarks = p_remarks;
 	}
 
+	public int getEp_no() {
+		return ep_no;
+	}
+
+	public void setEp_no(int ep_no) {
+		this.ep_no = ep_no;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVo [p_no=" + p_no + ", p_name=" + p_name + ", p_price=" + p_price + ", p_category=" + p_category
 				+ ", p_explanation=" + p_explanation + ", orgName=" + orgName + ", saveName=" + saveName + ", filePath="
-				+ filePath + ", fileSize=" + fileSize + ", p_remarks=" + p_remarks + "]";
+				+ filePath + ", fileSize=" + fileSize + ", p_remarks=" + p_remarks + ", ep_no=" + ep_no + "]";
 	}
 
 }

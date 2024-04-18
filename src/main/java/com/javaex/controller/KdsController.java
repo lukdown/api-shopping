@@ -1,9 +1,9 @@
 package com.javaex.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javaex.service.KdsService;
 import com.javaex.util.JsonResult;
+import com.javaex.vo.PageVo;
 import com.javaex.vo.ProductVo;
 
 @RestController
@@ -30,26 +31,25 @@ public class KdsController {
 	}
 	
 	//삭제
-	@PostMapping("api/admin/delete/{p_no}")
-	public JsonResult productdelete(@PathVariable("p_no") int p_no) {
+	@DeleteMapping("api/admin/delete/{p_no}")
+	public JsonResult productdelete(@PathVariable("p_no") int no) {
 		System.out.println("ProductController.delete()");
 		
-		ProductVo pVo=new ProductVo();
-		pVo.setP_no(p_no);
-		
-		int count=kdsService.exeProductRemove(pVo);
+		int count=kdsService.exeProductRemove(no);
 		
 		return JsonResult.success(count);
 	}
 	
 	//리스트
-	@GetMapping("api/admin/productlist")
-	public JsonResult productAdminList() {
+	@PostMapping("api/admin/productlist")
+	public JsonResult productAdminList(@RequestBody PageVo pageVo) {
 		System.out.println("ProductController.productAdminList()");
 		
-		List<ProductVo> pList = kdsService.exeProductAdminList();
+		System.out.println(pageVo);
 		
-		return JsonResult.success(pList);
+		Map<String, Object> pMap = kdsService.exeProductAdminList(pageVo.getCrtPage(),pageVo.getKeyword());
+		
+		return JsonResult.success(pMap);
 	}
 	
 }

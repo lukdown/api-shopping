@@ -19,7 +19,7 @@
 			limit #{startRowNo}, #{listCnt}
 		]]>
 	</select>
-	
+
 	<!-- 상품 리스트 전체 글갯수 -->
 	<select id="selectTotalCnt" parameterType="string" resultType="int">
 		<![CDATA[
@@ -30,9 +30,9 @@
 			<![CDATA[
 				where (p_name like concat('%',#{keyword},'%') or p_category like concat('%',#{keyword},'%'))
 			]]>
-		</if>	
+		</if>
 	</select>
-	
+
 	<!-- 등록 -->
 	<insert id="insert" parameterType="ProductVo">
 		<![CDATA[
@@ -40,31 +40,62 @@
 			values(null, #{p_name}, #{p_price}, #{p_category}, #{p_explanation}, null, null, null, null, null)
 		]]>
 	</insert>
-	<!-- values(null, #{p_name}, #{p_price}, #{p_category}, #{p_explanation}, #{filePath}, #{orgName}, #{saveName}, #{fileSize}, #{p_remarks})-->
+	<!-- values(null, #{p_name}, #{p_price}, #{p_category}, #{p_explanation}, #{filePath}, #{orgName}, #{saveName}, #{fileSize}, #{p_remarks}) -->
 
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="ProductVo">
       <![CDATA[ 
       	delete from product
-		where p_no=#{p_no}
+		where p_no=#{no}
+      ]]>
+	</delete>
+	
+	<!-- 삭제2 -->
+	<delete id="delete2" parameterType="ProductVo">
+      <![CDATA[ 
+      	delete from cart
+		where p_no=#{no}
       ]]>
 	</delete>
 
-	<!-- 전체 리스트 -->
-	<select id="selectAll" resultType="ProductVo">
-      <![CDATA[ 
-        select  p_no,
-				p_name,
-		        p_price,
-		        p_category,
-		        p_explanation,
-		        filePath,
-		        orgName,
-		        saveName,
-		        fileSize,
-		        p_remarks
-		from product
-      ]]>
+	<!-- 상품 전체 리스트 -->
+	<select id="selectAll" parameterType="map" resultType="ProductVo">
+      	<![CDATA[ 
+	        select  p.p_no,
+					p.p_name,
+					p.p_price,
+					p.p_category,
+					p.p_explanation,
+					p.filePath,
+					p.orgName,
+					p.saveName,
+					p.fileSize,
+					p.p_remarks,
+			        e.p_no as ep_no
+			from product p
+			left join product_e e
+			on p.p_no = e.e_no
+      	]]>
+		<if test="keyword != null">
+		<![CDATA[
+			where (p_name like concat('%',#{keyword},'%') or p_category like concat('%',#{keyword},'%'))
+		]]>
+		</if>
+		<![CDATA[				 
+			limit #{startRowNo}, #{listCnt}
+		]]>
+	</select>
+	<!-- 전체 글갯수 -->
+	<select id="selectproductTotalCnt" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(*) count
+			from product
+		]]>
+		<if test="keyword != null">
+			<![CDATA[
+				where (p_name like concat('%',#{keyword},'%') or p_category like concat('%',#{keyword},'%'))
+			]]>
+		</if>	
 	</select>
 	
 </mapper>
