@@ -1,5 +1,7 @@
 package com.javaex.vo;
 
+import java.util.List;
+
 public class SalesVo {
 
 	private int p_no;
@@ -26,6 +28,9 @@ public class SalesVo {
 	private String o_status;
 	private String o_payment;
 	
+	private List<ProductVo> pList;
+	private List<ProductEVo> peList;
+	
 	public SalesVo() {
 		super();
 	}
@@ -33,7 +38,7 @@ public class SalesVo {
 	public SalesVo(int p_no, String p_name, int p_price, String p_category, String p_explanation, String filePath,
 			String orgName, String saveName, long fileSize, String p_remarks, int e_no, int o_no, int e_amount,
 			String e_size, int user_no, String o_name, String o_address, String o_hp, String o_request, int totalprice,
-			String o_date, String o_status, String o_payment) {
+			String o_date, String o_status, String o_payment, List<ProductVo> pList, List<ProductEVo> peList) {
 		super();
 		this.p_no = p_no;
 		this.p_name = p_name;
@@ -58,6 +63,8 @@ public class SalesVo {
 		this.o_date = o_date;
 		this.o_status = o_status;
 		this.o_payment = o_payment;
+		this.pList = pList;
+		this.peList = peList;
 	}
 
 	public int getP_no() {
@@ -244,6 +251,22 @@ public class SalesVo {
 		this.o_payment = o_payment;
 	}
 
+	public List<ProductVo> getpList() {
+		return pList;
+	}
+
+	public void setpList(List<ProductVo> pList) {
+		this.pList = pList;
+	}
+
+	public List<ProductEVo> getPeList() {
+		return peList;
+	}
+
+	public void setPeList(List<ProductEVo> peList) {
+		this.peList = peList;
+	}
+
 	@Override
 	public String toString() {
 		return "SalesVo [p_no=" + p_no + ", p_name=" + p_name + ", p_price=" + p_price + ", p_category=" + p_category
@@ -251,8 +274,10 @@ public class SalesVo {
 				+ saveName + ", fileSize=" + fileSize + ", p_remarks=" + p_remarks + ", e_no=" + e_no + ", o_no=" + o_no
 				+ ", e_amount=" + e_amount + ", e_size=" + e_size + ", user_no=" + user_no + ", o_name=" + o_name
 				+ ", o_address=" + o_address + ", o_hp=" + o_hp + ", o_request=" + o_request + ", totalprice="
-				+ totalprice + ", o_date=" + o_date + ", o_status=" + o_status + ", o_payment=" + o_payment + "]";
+				+ totalprice + ", o_date=" + o_date + ", o_status=" + o_status + ", o_payment=" + o_payment + ", pList="
+				+ pList + ", peList=" + peList + "]";
 	}
+	
 	
 	
 	

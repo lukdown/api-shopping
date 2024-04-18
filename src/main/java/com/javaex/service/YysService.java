@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.YysDao;
+import com.javaex.vo.ProductEVo;
 import com.javaex.vo.ProductVo;
 import com.javaex.vo.SalesVo;
 
@@ -17,12 +18,27 @@ public class YysService {
 	@Autowired
 	private YysDao yysDao;
 
+	
+	public List<SalesVo> exeChartList(String keyword) {
+		System.out.println("FoodStoreService.exeList()");
+		
+		List<SalesVo> chartList = yysDao.chartSelect(keyword);
+
+		return chartList;
+	}
+	
+	
+	
+	
+	
+	
+	
 	// 관리자 매출 정보 리스트
 	public Map<String, Object> exeAdminList(int crtPage, String keyword) {
 		System.out.println("YysService.exeAdminList()");
 
 		// 한페이지당 출력 글갯수
-		int listCnt = 10;
+		int listCnt = 5;
 
 		// crtPage
 		crtPage = (crtPage > 0) ? crtPage : (crtPage = 1);
@@ -46,8 +62,33 @@ public class YysService {
 		limiMap.put("keyword", keyword);
 
 		// dao에 전달해서 현재페이지의 리스트 10개를 받는다
-		List<SalesVo> adminproductList = yysDao.adminproductList(limiMap);
+		List<SalesVo> apList = yysDao.adminproductList(limiMap);
 
+//		
+//		for (int i = 0; i < adminproductList.size(); i++) {
+//			List<ProductVo> pVo = yysDao.productSelectOne(adminproductList.get(i).getP_no());
+//			adminproductList.get(i).setpList(pVo);
+//			
+//		}
+//		
+//		
+//		for (int i = 0; i < adminproductList.size(); i++) {
+//			List<ProductEVo> peVo = yysDao.producteSelectOne(adminproductList.get(i).getE_no());
+//			adminproductList.get(i).setPeList(peVo);
+//			
+//		}
+		
+		System.out.println("======================================");
+		//System.out.println(adminproductList);
+		System.out.println("======================================");
+		
+		
+		
+		
+		
+		
+		
+		
 		///////////////////////////////////////////////////////////
 		// 페이징 계산
 		///////////////////////////////////////////////////////////
@@ -92,7 +133,7 @@ public class YysService {
 
 		// 5개 map으로 묶어서 controller한테 보낸다 리턴해준다
 		Map<String, Object> pMap = new HashMap<String, Object>();
-		pMap.put("adminproductList", adminproductList);
+		pMap.put("apList", apList);
 		pMap.put("startPageBtnNo", startPageBtnNo);
 		pMap.put("endPageBtnNo", endPageBtnNo);
 		pMap.put("prev", prev);
