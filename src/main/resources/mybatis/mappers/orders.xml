@@ -119,6 +119,7 @@
 		</selectKey>
 	</insert>
 	
+	<!-- 
 	<insert id="insertProduct" parameterType="java.util.List">
 		<![CDATA[
 			insert into product_e(
@@ -135,7 +136,15 @@
 			]]>
 		</foreach>
 	</insert>
-	
+	 -->
+	 
+	 <insert id="insertProduct" parameterType="productEVo">
+		<![CDATA[
+			insert into product_e
+			values(null, #{p_no}, #{o_no}, #{c_p_amount}, #{c_size})
+		]]>
+	 </insert>
+	 
 	<!-- 장바구니 비우기 -->
 	<delete id="deleteCart" parameterType="CartVo">
 		<![CDATA[
@@ -143,6 +152,18 @@
 			where user_no = #{no}
 		]]>
 	</delete>
+	
+	<!-- 바로 결제하면 상품정보 하나 -->
+	<select id="cartInfoDirect" parameterType="int" resultType="ProductVo">
+		<![CDATA[
+			select p_name,
+				   p_price,
+				   p_no
+			from product
+			where p_no = #{p_no}
+		]]>
+	</select>
+	
 	
 	
 </mapper>

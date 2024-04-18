@@ -11,6 +11,7 @@ import com.javaex.dao.PaymentDao;
 import com.javaex.vo.CartVo;
 import com.javaex.vo.OrdersVo;
 import com.javaex.vo.ProductEVo;
+import com.javaex.vo.ProductVo;
 import com.javaex.vo.UserVo;
 
 @Service
@@ -18,8 +19,8 @@ public class PaymentService {
 
 	@Autowired
 	private PaymentDao paymentDao;
-	
-	//리스트
+
+	// 리스트
 	public Map<String, Object> exePaymentManageList(int crtPage, String keyword, String category) {
 		System.out.println("PtService.exeMyMemberList()");
 
@@ -80,57 +81,74 @@ public class PaymentService {
 
 		return pMap;
 	}
-	
-	
-	//배송상태 변경 
+
+	// 배송상태 변경
 	public int exePStatusChange(int o_no) {
 		System.out.println("exePStatusChange()");
 		int count = paymentDao.pStatusChange(o_no);
 		return count;
 	}
-	
+
 	/////////////////////////////////////////////////////////////////////////
-	//회원
-	
-	//회원 리스트 
-	public Map<String, Object> exeCustomerView(int no){
+	// 회원
+
+	// 회원 리스트
+	public Map<String, Object> exeCustomerView(int no) {
 		System.out.println("exeCustomerView()");
-		
+
 		List<CartVo> cartList = paymentDao.cartList(no);
 		UserVo userVo = paymentDao.userInfo(no);
-		
+
 		Map<String, Object> customerMap = new HashMap<String, Object>();
 		customerMap.put("cartList", cartList);
 		customerMap.put("userVo", userVo);
-		
+
 		return customerMap;
 	}
-	
-	//orders insert
+
+	// orders insert
 	public int exeInsertOrders(OrdersVo ordersVo) {
 		System.out.println("exeInsertOrders()");
-		
+
 		int count = paymentDao.insertOrders(ordersVo);
 		return count;
 	}
-	
-	//product intsert
-	public int exeInsertProductE(List<ProductEVo>paymentList) {
+
+	// product intsert
+	public int exeInsertProductE(List<ProductEVo> paymentList) {
 		System.out.println("exeInsertProductE");
 		
-		int count = paymentDao.insertProduct(paymentList);
-		return count;
+		for(int i=0; i<paymentList.size(); i++) {
+			int count = paymentDao.insertProduct(paymentList.get(i));
+		}
+		
+		return 0;
 	}
-	
-	//장바구니 비워주기
+
+	// 장바구니 비워주기
 	public int exeDeleteCart(int no) {
 		System.out.println("exeDeleteCart()");
-		
+
 		return paymentDao.deleteCart(no);
 	}
 	
-	
-	
-	
-	
+	//바로 결제
+	public Map<String, Object> exeCustomerView(int p_no, int no) {
+		System.out.println("exeCustomerView()");
+		
+		ProductVo productVo = paymentDao.cartListDirect(p_no);
+		UserVo userVo = paymentDao.userInfo(no);
+
+		Map<String, Object> customerDirectMap = new HashMap<String, Object>();
+		customerDirectMap.put("productVo", productVo);
+		customerDirectMap.put("userVo", userVo);
+
+		return customerDirectMap;
+	}
+
+	public int exeInsertProductEDirect(ProductEVo productEVo) {
+		System.out.println("exeInsertProductEDirect");
+		int count = paymentDao.insertProduct(productEVo);
+		return count;
+	}
 }

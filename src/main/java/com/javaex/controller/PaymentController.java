@@ -18,6 +18,7 @@ import com.javaex.util.JwtUtil;
 import com.javaex.vo.OrdersVo;
 import com.javaex.vo.PageVo;
 import com.javaex.vo.ProductEVo;
+import com.javaex.vo.ProductVo;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -52,6 +53,10 @@ public class PaymentController {
 
 	///////////////////////////////////////////////////////////
 	//// 회원////
+
+	// 장바구니 결제
+
+	// 리스트 불러오기
 	@GetMapping("/api/customer/payment")
 	public Map<String, Object> customerView(HttpServletRequest request) {
 		System.out.println("customerView");
@@ -71,7 +76,7 @@ public class PaymentController {
 		// JWT 토큰에서 no 값을 추출
 		int no = JwtUtil.getNoFromHeader(request);
 		ordersVo.setUser_no(no);
-		System.out.println(no);
+		System.out.println(ordersVo);
 		if (no != -1) { // 정상
 			int count = paymentService.exeInsertOrders(ordersVo);
 			System.out.println("count:            " + count);
@@ -111,7 +116,7 @@ public class PaymentController {
 		// 토큰에서 로그인한 회원번호
 		// JWT 토큰에서 no 값을 추출
 		int no = JwtUtil.getNoFromHeader(request);
-		
+
 		if (no != -1) { // 정상
 			int delete = paymentService.exeDeleteCart(no);
 			System.out.println("delete:            " + delete);
@@ -122,7 +127,37 @@ public class PaymentController {
 			return JsonResult.fail("fail");
 		}
 	}
-	
-	
-	
+
+	// 바로 결제하기
+	//가져오기
+	@GetMapping("/api/customer/payment/direct/{p_no}")
+	public Map<String, Object> customerViewDirect(@PathVariable("p_no") int p_no, HttpServletRequest request) {
+		System.out.println("customerViewDirect");
+
+		int no = JwtUtil.getNoFromHeader(request);
+		Map<String, Object> paymentMap = paymentService.exeCustomerView(p_no, no);
+		System.out.println("바로결제하기 누르면" + paymentMap);
+		return paymentMap;
+	}
+
+	// product insert2222
+	@PostMapping("/api/customer/payment/direct")
+	public JsonResult InsertProductE(@RequestBody ProductEVo productEVo, HttpServletRequest request) {
+		System.out.println("PaymentController.PayproductE()");
+
+		// 토큰에서 로그인한 회원번호
+		// JWT 토큰에서 no 값을 추출
+		int no = JwtUtil.getNoFromHeader(request);
+		System.out.println(productEVo);
+		if (no != -1) { // 정상
+			int result = paymentService.exeInsertProductEDirect(productEVo);
+			System.out.println("result:            " + result);
+
+			return JsonResult.success(result);
+		} else {
+			// 토큰이 없거나(로그인상태 아님) 변조된 경우
+			return JsonResult.fail("fail");
+		}
+	}
+
 }

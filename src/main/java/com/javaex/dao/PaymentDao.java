@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.javaex.vo.CartVo;
 import com.javaex.vo.OrdersVo;
 import com.javaex.vo.ProductEVo;
+import com.javaex.vo.ProductVo;
 import com.javaex.vo.UserVo;
 
 @Repository
@@ -66,10 +67,10 @@ public class PaymentDao {
 		return ordersVo.getO_no();
 	}
 
-	public int insertProduct(List<ProductEVo> paymentList) {
+	public int insertProduct(ProductEVo productEVo) {
 		System.out.println("insertProduct()");
 
-		int count = sqlSession.insert("orders.insertProduct", paymentList);
+		int count = sqlSession.insert("orders.insertProduct", productEVo);
 
 		return count;
 	}
@@ -78,4 +79,12 @@ public class PaymentDao {
 		System.out.println("deleteCart()");
 		return sqlSession.delete("orders.deleteCart", no);
 	}
+	
+	//바로 결제 리스트
+	public ProductVo cartListDirect(int p_no) {
+		System.out.println("cartListDirect()");
+		ProductVo producatVo = sqlSession.selectOne("orders.cartInfoDirect", p_no);
+		return producatVo;
+	}
+	
 }
