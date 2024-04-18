@@ -22,6 +22,7 @@ public class YysController {
 	@Autowired
 	private YysService yysService;
 
+	
 	// 리스트 가져오기
 	@PostMapping(value = "/api/customer/list")
 	public JsonResult productlist(HttpServletRequest request, @RequestBody PageVo pageVo) {
