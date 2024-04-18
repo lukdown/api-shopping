@@ -31,6 +31,7 @@ public class YysController {
 			System.out.println("FoodStoreController.list()");
 			
 			
+			
 			List<SalesVo> salesList = yysService.exeChartList(keyword);
 
 			return JsonResult.success(salesList);
