@@ -74,7 +74,7 @@
 			        e.p_no as ep_no
 			from product p
 			left join product_e e
-			on p.p_no = e.e_no
+			on p.p_no = e.p_no
       	]]>
 		<if test="keyword != null">
 		<![CDATA[
