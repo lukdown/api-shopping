@@ -20,5 +20,23 @@ public class MemberService {
 		
 		return authUser;
 	}
-
+	
+	//회원가입
+	public int exeJoin(UserVo userVo) {
+		System.out.println("MemberService.exeJoin()");
+		int count = memberDao.join(userVo);
+		System.out.println(count);
+		
+		return count;
+	}
+	
+	//중복체크
+	public int exeIdCheck(String id) {
+		System.out.println("MemberService.exeIdCheck");
+		
+		int count = memberDao.idCheck(id);
+		
+		return count;
+	}
+	
 }

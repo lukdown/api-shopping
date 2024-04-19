@@ -21,4 +21,22 @@ public class MemberDao {
 		
 		return authUser;
 	}
+	
+	//회원가입
+	public int join(UserVo userVo) {
+		System.out.println("MemberDao.join()");
+		int count = sqlSession.insert("user.join", userVo);
+		System.out.println(count);
+		
+		return count;
+	}
+	
+	//중복체크
+	public int idCheck(String id) {
+		System.out.println("MemberDao.idCheck()");
+		int count = sqlSession.selectOne("user.idCheck" , id);
+		System.out.println(count);
+		
+		return count;
+	}
 }
